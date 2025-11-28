@@ -27,10 +27,10 @@ Die Übungen befinden sich im Ordner `rxjs-playground/src/app/exercises/`.
 
 # ✅ Vorbereitung
 
-Damit wir gleich durchstarten können, solltest Du ein paar Vorbereitungen treffen.  
-Die gesamte Installation wird rund 30 Minuten dauern. 
+Damit wir gleich durchstarten können, solltest Du ein paar Vorbereitungen treffen.
+Die gesamte Installation wird rund 20 Minuten dauern.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > **Bitte erledige die Vorbereitung rechtzeitig vor dem Kurs. Bitte melde dich bei uns, wenn etwas nicht klappt.**
 
 ## 1.) Benötigte Software
@@ -39,71 +39,68 @@ Die gesamte Installation wird rund 30 Minuten dauern.
 2. **Google Chrome:** [https://www.google.com/chrome/](https://www.google.com/chrome/)
 3. **Visual Studio Code:** [https://code.visualstudio.com](https://code.visualstudio.com)<br>
    _oder_ eine andere geeignete IDE wie **IntelliJ/WebStorm**
-   + Wir empfehlen dir eine Auswahl an Extensions für Visual Studio Code.  
-     Dazu haben wir ein Extension Pack vorbereitet, das alles Nötige einrichtet:  
+   + Wir empfehlen dir eine Auswahl an Extensions für Visual Studio Code.
+     Dazu haben wir ein Extension Pack vorbereitet, das alles Nötige einrichtet:
      [Angular-Schule: Extension Pack (nur für Visual Studio Code)](https://marketplace.visualstudio.com/items?itemName=angular-schule.angular-schule-extension-pack)
 
-<!--
-   + [Angular DevTools](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh)
-   + [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
--->
 
 ## 2.) Proxy?
 
 Falls in deinem Unternehmensnetz der Internetzugang durch einen Proxy erfolgt, sind ggf. gesonderte Einstellungen nötig.
 Wir haben dir hierfür folgende Anleitung erstellt:
-https://workshop.angular.schule/proxy  
+https://workshop.angular.schule/proxy
 Sollte es Probleme mit dem Proxy geben, melde Dich bitte bei uns, dann finden wir eine Lösung.
 
 
-## 3.) Pakete installieren
+## 3.) Repository herunterladen
 
-Die Angular CLI ist das offizielle Build-Tool für Angular. Mit folgendem Befehl kannst Du die CLI auf dem System installieren:
+
+> [!CAUTION]
+> # Wichtiger Hinweis zur aktuellen Sicherheitslage
+> 
+> Derzeit ist das npm-Ökosystem von einer Sicherheitslücke betroffen ("Shai-Hulud"-Wurm). 
+> Aus diesem Grund haben wir das Übungsprojekt bereits für dich vorbereitet und auf Sicherheit geprüft.
+> 
+> **Bitte erstelle das Projekt aktuell nicht selbst mit `ng new`!**
+> Du findest im Repository bereits ein fertiges und sicheres Projekt mit einer geprüften `package-lock.json`.
+> So kannst du ohne Risiko mit dem Workshop starten.
+
+Lade das Repository herunter:
+
+**Entweder per Git:**  
 
 ```bash
-npm install --location=global @angular/cli
+git clone https://github.com/angular-schule/2025-12-angular-workshop-mannheim.git
+cd 2025-12-angular-workshop-mannheim
 ```
 
-⚠️ Überprüfe bitte anschließend die Versionen, damit wir beim Workshop alle auf dem gleichen Stand sind:
+**Oder als ZIP-Datei:**  
+Lade das Repository [hier als ZIP herunter](https://github.com/angular-schule/2025-12-angular-workshop-mannheim/archive/refs/heads/main.zip) und entpacke es in deinem Arbeitsverzeichnis.
+
+> ⚠️ Bitte speichere das Projekt nicht auf einem Netzlaufwerk, sondern direkt auf der lokalen Festplatte!
+
+## 4.) Abhängigkeiten installieren
+
+Wechsle in das Projektverzeichnis und installiere die Abhängigkeiten.
+Dank der gesperrten `package-lock.json` werden nur geprüfte und sichere Paketversionen installiert.
+
 
 ```bash
-node -v
-# Erwartet:
-# 20.19.x oder höher, 22.12.x oder höher, oder 24.0.x oder höher,
-# aber nicht 21.x oder 23.x!
-
-ng version
-# Erwartet:
-# Angular CLI : 21.x.x (!)
-# Angular     : 21.x.x (!)
-```
-
-Falls du bereits eine ältere Version der Angular CLI auf deinem System installiert hast, führe die Installation bitte trotzdem durch.
-Global sollte stets die neueste Version installiert sein.
-
-
-## 4.) Startprojekt erzeugen
-
-Bitte lege das Übungsprojekt schon vor Beginn des Workshops an.
-Die Angular CLI nimmt uns die meisten Schritte schon ab.
-Was die Parameter im Einzelnen bedeuten, besprechen wir natürlich im Workshop!
-
-> ⚠️ Bitte erstelle das Projekt nicht auf einem Netzlaufwerk, sondern direkt auf der lokalen Festplatte!
-
-Führe in Deinem Arbeitsverzeichnis die folgenden Befehle aus:
-
-```bash
-ng new book-rating --style=scss --no-ssr
 cd book-rating
-ng serve
+npm install
 ```
-
-Du kannst während der Installation die Angular-Unterstützung für KI-Tools aktivieren, falls du einen der aufgelisteten Dienste verwendest.
-Falls nicht, wähle bei der Frage "*Which AI tools do you want to configure with Angular best practices?*" bitte die Option `None`.
 
 Die Installation kann bei langsamer Internetverbindung sehr lange dauern.
-Warte beim Schritt `Installing packages (npm)` mit Geduld ab!
+Warte mit Geduld ab!
 
+
+## 5.) Projekt starten
+
+Starte den Entwicklungsserver:
+
+```bash
+npm start
+```
 
 > Auf http://localhost:4200 sollte nun eine Website mit dem Text *"Hello, book-rating"* erscheinen!
 
@@ -112,41 +109,10 @@ Warte beim Schritt `Installing packages (npm)` mit Geduld ab!
 Beende danach den laufenden Webserver mit Strg + C.
 
 
-## 5.) Test-Umgebung prüfen
-
-Prüfe bitte, ob der folgende Befehl ohne Fehlermeldungen ausführt:
-
-```bash
-ng test
-```
-
-Anschließend kannst du den Prozess wieder mit Strg + C beenden.
-
-
-## 6.) Styles installieren
-
-Bitte führe diesen Befehl **im Projektverzeichnis `book-rating`** aus, um unser Paket mit CSS-Styles zu installieren.
-Die Warnungen bei der Installation kannst du ignorieren.
-
-```bash
-npm i @angular-schule/workshop-styles
-```
-
-
-Öffne dann bitte die Datei `src/styles.scss` im Projektordner `book-rating` und füge die folgende Zeile ein:
-
-```css
-@use '@angular-schule/workshop-styles/index';
-```
-
-Damit werden die installierten Styles global in das Projekt eingebunden und sind aktiv.
-Wir werden die Stylesheets im Workshop gemeinsam nutzen.
-
-
-## 7.) Projekt erforschen
+## 6.) Projekt erforschen
 
 Öffne den Projektordner `book-rating` in deinem Editor.
-Nimm dir nun ein paar Minuten Zeit, um die Struktur des generierten Projekts zu untersuchen.
+Nimm dir nun ein paar Minuten Zeit, um die Struktur des Projekts zu untersuchen.
 So hast du die wichtigsten Dateien schon einmal gesehen, bevor wir den Aufbau in der Schulung ausführlich besprechen!
 
 
@@ -159,4 +125,4 @@ Sollte es zu einer Fehlermeldung kommen, dann sende uns den Fehlertext einfach p
 
 <img src="https://assets.angular.schule/logo-angular-schule.png" height="60">
 
-### &copy; https://angular.schule | Stand: 27.11.2025
+### &copy; https://angular.schule | Stand: 28.11.2025
