@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DashboardPage } from "./books/dashboard-page/dashboard-page";
 
@@ -6,7 +6,8 @@ import { DashboardPage } from "./books/dashboard-page/dashboard-page";
   selector: 'app-root',
   imports: [RouterOutlet, DashboardPage],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
   protected readonly title = signal('Book Rating');
