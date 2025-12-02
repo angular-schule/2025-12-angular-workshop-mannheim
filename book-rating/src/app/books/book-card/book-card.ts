@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'app-book-card',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './book-card.scss',
 })
 export class BookCard {
+
+  book = input.required<Book>();
 
 }
