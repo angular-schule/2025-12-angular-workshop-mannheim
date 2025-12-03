@@ -1,14 +1,25 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Book } from '../shared/book';
 
 @Component({
   selector: 'app-book-card',
-  imports: [],
   templateUrl: './book-card.html',
   styleUrl: './book-card.scss',
 })
 export class BookCard {
 
+  // früher @Input()
   book = input.required<Book>();
 
+  // früher @Ouptput()
+  rateUp = output<Book>();
+  rateDown = output<Book>();
+
+  doRateUp() {
+    this.rateUp.emit(this.book());
+  }
+
+  doRateDown() {
+    this.rateDown.emit(this.book());
+  }
 }
