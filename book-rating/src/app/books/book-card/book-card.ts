@@ -1,10 +1,11 @@
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { Book } from '../shared/book';
 
 @Component({
   selector: 'app-book-card',
   templateUrl: './book-card.html',
   styleUrl: './book-card.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookCard {
 
