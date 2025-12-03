@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookCard } from './book-card';
+import { inputBinding } from '@angular/core';
 
 describe('BookCard', () => {
   let component: BookCard;
@@ -12,7 +13,16 @@ describe('BookCard', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BookCard);
+    fixture = TestBed.createComponent(BookCard, {
+      bindings: [
+        inputBinding('book', () => ({
+          isbn: '000',
+          title: 'Test',
+          description: '',
+          rating: 3
+        }))
+      ]
+    });
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
