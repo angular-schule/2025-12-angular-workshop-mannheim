@@ -1,12 +1,14 @@
 import { Book } from './book';
 import { BookRatingHelper } from './book-rating-helper';
+import { TestBed } from '@angular/core/testing';
 
 describe('BookRatingHelper', () => {
   let service: BookRatingHelper;
   let book: Book;
 
   beforeEach(() => {
-    service = new BookRatingHelper();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(BookRatingHelper);
     book = {
       isbn: '000',
       title: 'Test',
