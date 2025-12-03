@@ -12,9 +12,9 @@ import { BookRatingHelper } from '../shared/book-rating-helper';
 })
 export class DashboardPage {
 
-  constructor() {
-    throw '💩';
-  }
+  // constructor() {
+  //   throw '💩';
+  // }
 
   readonly #bookRatingHelper = inject(BookRatingHelper);
 
@@ -41,7 +41,11 @@ export class DashboardPage {
   ]);
 
   doRateUp(book: Book) {
-    const ratedBook = this.#bookRatingHelper.rateUp(book);
+    // const ratedBook = this.#bookRatingHelper.rateUp(book);
+    const ratedBook = {
+      ...book,
+      rating: Math.min(book.rating + 1, 5)
+    };
     this.updateAndSortBook(ratedBook);
   }
 
