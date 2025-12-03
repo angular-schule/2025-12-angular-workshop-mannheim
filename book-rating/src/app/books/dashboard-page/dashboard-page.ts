@@ -12,6 +12,10 @@ import { BookRatingHelper } from '../shared/book-rating-helper';
 })
 export class DashboardPage {
 
+  constructor() {
+    throw '💩';
+  }
+
   readonly #bookRatingHelper = inject(BookRatingHelper);
 
   // 🦆
