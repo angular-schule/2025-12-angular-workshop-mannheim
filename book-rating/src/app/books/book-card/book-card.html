@@ -9,5 +9,17 @@
       </span>
     </header>
     <p>{{ book().description }}</p>
+
+    <!-- WORST CASE SOFTWARE -->
+    <!--
+    1. Signal nicht gescheit aktualisiert (kein set/update)
+    2. Buch-Objekt mutiert (vs immutability)
+    3. Logik im Template
+    4. Single Responsibility Principle (SRP) verletzt
+    5. Nicht barrierefrei
+    -->
+    <button class="btn btn-primary me-2" (click)="book().rating = book().rating - 1">-1</button>
+    <button class="btn btn-primary" (click)="book().rating = book().rating + 1">+1</button>
+
   </div>
 </article>
