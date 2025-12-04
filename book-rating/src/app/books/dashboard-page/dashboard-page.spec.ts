@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardPage } from './dashboard-page';
+import { BookRatingHelper } from '../shared/book-rating-helper';
 
 describe('DashboardPage', () => {
   let component: DashboardPage;
@@ -8,7 +9,20 @@ describe('DashboardPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardPage]
+      imports: [DashboardPage],
+
+      // Der Klassiker: Alles ersetzen, echte Mocks!
+      // providers: [
+      //   {
+      //     provide: BookRatingHelper,
+      //     useValue: {
+      //       minRating: -1000,
+      //       maxRating: 5,
+      //       rateUp: () => {},
+      //       rateDown: () => {},
+      //     }
+      //   }
+      // ]
     })
     .compileComponents();
 
@@ -18,6 +32,7 @@ describe('DashboardPage', () => {
   });
 
   it('should create', () => {
+    console.log(TestBed.inject(BookRatingHelper));
     expect(component).toBeTruthy();
   });
 });
