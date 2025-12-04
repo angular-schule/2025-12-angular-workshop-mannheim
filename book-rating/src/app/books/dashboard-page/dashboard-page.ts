@@ -13,10 +13,6 @@ import { BookCreate } from "../book-create/book-create";
 })
 export class DashboardPage {
 
-  // constructor() {
-  //   throw '💩';
-  // }
-
   readonly #bookRatingHelper = inject(BookRatingHelper);
 
   // 🦆
@@ -59,5 +55,9 @@ export class DashboardPage {
     this.books.update(books => books
       .map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
       .sort((a, b) => b.rating - a.rating));
+  }
+
+  doCreateBook(newBook: Book) {
+    this.books.update(books => [...books, newBook]);
   }
 }
