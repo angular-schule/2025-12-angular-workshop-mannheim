@@ -3,10 +3,14 @@ import { Book } from '../shared/book';
 import { BookCard } from "../book-card/book-card";
 import { BookRatingHelper } from '../shared/book-rating-helper';
 import { BookCreate } from "../book-create/book-create";
+import { BookStore } from '../shared/book-store';
+import { httpResource } from '@angular/common/http';
+import { JsonPipe } from '@angular/common';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-dashboard-page',
-  imports: [BookCard, BookCreate],
+  imports: [BookCard, BookCreate, JsonPipe],
   templateUrl: './dashboard-page.html',
   styleUrl: './dashboard-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -14,28 +18,20 @@ import { BookCreate } from "../book-create/book-create";
 export class DashboardPage {
 
   readonly #bookRatingHelper = inject(BookRatingHelper);
+  readonly #bookStore = inject(BookStore);
 
-  // 🦆
-  readonly books = signal<Book[]>([
-    {
-      isbn: '000',
-      title: 'Angular',
-      description: 'Tolles Buch',
-      rating: 5
-    },
-    {
-      isbn: '111',
-      title: 'React',
-      description: 'Auch gutes Buch',
-      rating: 3
-    },
-    {
-      isbn: '222',
-      title: 'jQuery',
-      description: 'Altes Buch',
-      rating: 1
-    }
-  ]);
+
+
+  readonly books = rxResource({
+    stream: () => {
+      return this.#bookStore.getBooks()
+    },defaultValue: []
+  });
+
+  constructor() {
+    // this.#bookStore.getBooks().subscribe(b => this.books.set(b))
+
+  }
 
   doRateUp(book: Book) {
     const ratedBook = this.#bookRatingHelper.rateUp(book);
@@ -60,4 +56,11 @@ export class DashboardPage {
   doCreateBook(newBook: Book) {
     this.books.update(books => [...books, newBook]);
   }
+
+  isbn = signal('9783864909467');
+
+  bookResource = httpResource<Book>(
+    () => `https://api.angular.schule/books/${ this.isbn() }`
+  );
+
 }

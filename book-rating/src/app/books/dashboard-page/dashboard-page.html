@@ -2,9 +2,15 @@
   (createBook)="doCreateBook($event)"
 />
 
-@for (b of books(); track b.isbn) {
+@for (b of books.value(); track b.isbn) {
   <app-book-card
     (rateUp)="doRateUp($event)"
     (rateDown)="doRateDown($event)"
     [book]="b" />
 }
+
+@if (bookResource.hasValue()) {
+  <pre>{{ bookResource.value() | json }}</pre>
+}
+
+<button (click)="isbn.set('9783864904523')">Change Book</button>
