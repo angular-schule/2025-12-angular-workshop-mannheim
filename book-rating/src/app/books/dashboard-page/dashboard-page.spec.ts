@@ -31,8 +31,20 @@ describe('DashboardPage', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
-    console.log(TestBed.inject(BookRatingHelper));
-    expect(component).toBeTruthy();
+  it('should use BookRatingHelper.rateUp() to rate up a book', () => {
+
+    const testBook = component.books()[1];
+
+    console.log('*** VORHER ***', component.books());
+
+
+    const bookRatingHelper = TestBed.inject(BookRatingHelper);
+    const spy = vi.spyOn(bookRatingHelper, 'rateUp');
+
+    component.doRateUp(testBook);
+
+    console.log('*** NACHHER ***', component.books());
+
+    expect(spy).toHaveBeenCalledExactlyOnceWith(testBook)
   });
 });
