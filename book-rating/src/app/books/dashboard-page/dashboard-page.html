@@ -2,8 +2,8 @@
   (createBook)="doCreateBook($event)"
 />
 
-@if (books.hasValue()) {
-  @for (b of books.value(); track b.isbn) {
+@if (books()) {
+  @for (b of books(); track b.isbn) {
     <app-book-card
       (rateUp)="doRateUp($event)"
       (rateDown)="doRateDown($event)"
@@ -11,7 +11,7 @@
   }
 }
 
-@if(books.isLoading()) { Lade Bücher! }
+@if(loading()) { <h1>Lade Bücher!</h1> }
 
 @if (bookResource.hasValue()) {
   <pre>{{ bookResource.value() | json }}</pre>

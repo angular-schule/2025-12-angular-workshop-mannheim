@@ -7,6 +7,8 @@ import { BookStore } from '../shared/book-store';
 import { httpResource } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
+import { selectBooks, selectBooksLoading } from '../store/book.selectors';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -17,16 +19,23 @@ import { rxResource } from '@angular/core/rxjs-interop';
 })
 export class DashboardPage {
 
-  readonly #bookRatingHelper = inject(BookRatingHelper);
+  books = inject(Store).selectSignal(selectBooks);
+  loading = inject(Store).selectSignal(selectBooksLoading);
+
+
+
+
+
+  // readonly #bookRatingHelper = inject(BookRatingHelper);
   readonly #bookStore = inject(BookStore);
 
 
 
-  readonly books = rxResource({
-    stream: () => {
-      return this.#bookStore.getBooks()
-    },defaultValue: []
-  });
+  // readonly books = rxResource({
+  //   stream: () => {
+  //     return this.#bookStore.getBooks()
+  //   },defaultValue: []
+  // });
 
   constructor() {
     // this.#bookStore.getBooks().subscribe(b => this.books.set(b))
@@ -34,27 +43,27 @@ export class DashboardPage {
   }
 
   doRateUp(book: Book) {
-    const ratedBook = this.#bookRatingHelper.rateUp(book);
-    // const ratedBook = {
-    //   ...book,
-    //   rating: Math.min(book.rating + 1, 5)
-    // };
-    this.updateAndSortBook(ratedBook);
+    // const ratedBook = this.#bookRatingHelper.rateUp(book);
+    // // const ratedBook = {
+    // //   ...book,
+    // //   rating: Math.min(book.rating + 1, 5)
+    // // };
+    // this.updateAndSortBook(ratedBook);
   }
 
   doRateDown(book: Book) {
-    const ratedBook = this.#bookRatingHelper.rateDown(book);
-    this.updateAndSortBook(ratedBook);
+    // const ratedBook = this.#bookRatingHelper.rateDown(book);
+    // this.updateAndSortBook(ratedBook);
   }
 
   updateAndSortBook(ratedBook: Book) {
-    this.books.update(books => books
-      .map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
-      .sort((a, b) => b.rating - a.rating));
+    // this.books.update(books => books
+    //   .map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
+    //   .sort((a, b) => b.rating - a.rating));
   }
 
   doCreateBook(newBook: Book) {
-    this.books.update(books => [...books, newBook]);
+    // this.books.update(books => [...books, newBook]);
   }
 
   isbn = signal('9783864909467');
