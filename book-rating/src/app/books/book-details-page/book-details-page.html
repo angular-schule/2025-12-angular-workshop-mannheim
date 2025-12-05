@@ -1,7 +1,11 @@
 @let b =  book();
 
-<h2>{{ b?.isbn }}</h2>
-<p>{{ b?.title }}</p>
+<!-- <h2>{{ b?.isbn }}</h2>
+<p>{{ b?.title }}</p> -->
+
+<pre>
+  {{ book() | json }}
+</pre>
 
 <a routerLink="/books/9783864909467">Gehe zu Angular</a><br>
 <a routerLink="/books/9783864905520">Gehe zu Rect</a><br>
