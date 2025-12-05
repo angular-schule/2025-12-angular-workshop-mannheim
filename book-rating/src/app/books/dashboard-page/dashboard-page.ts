@@ -63,4 +63,8 @@ export class DashboardPage {
     () => `https://api.angular.schule/books/${ this.isbn() }`
   );
 
+  bookResource2 = rxResource({
+    stream: () => this.#bookStore.getSingleBook(this.isbn())
+  });
+
 }
