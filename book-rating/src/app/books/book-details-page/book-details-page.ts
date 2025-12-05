@@ -4,7 +4,8 @@ import { Book } from '../shared/book';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { JsonPipe } from '@angular/common';
-import { map, mergeMap } from 'rxjs';
+import { catchError, concatMap, map, mergeMap, of, switchMap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-book-details-page',
@@ -20,7 +21,14 @@ export class BookDetailsPage {
 
   book = toSignal(this.router.paramMap.pipe(
     map(paramMap => paramMap.get('isbn') || ''),
-    mergeMap(isbn => this.bookStore.getSingleBook(isbn))
+    switchMap(isbn => this.bookStore.getSingleBook(isbn).pipe(
+      catchError((err: HttpErrorResponse) => of({
+        isbn: '000',
+        title: 'ERROR',
+        description: err.message,
+        rating: 1
+      }))
+    ))
   ))
 
 
